@@ -9,28 +9,18 @@ public class Criba {
 			if (max >=2) {
 				//Declaraciones
 				int dim= max + 1; //Tamaño del array
-				boolean[] esPrimo = new boolean[dim];
-				//Inicializar el array
-				for (i=0; i<dim; i++ )
-					esPrimo[i] = true;
+				
+				//PONER EN OTRO METODO//
+				boolean[] esPrimo = iniciarPrimos(dim);
+				
 				//Eliminar el 0 y el 1 ya que no son primos
 				esPrimo[0] = esPrimo[1] = false;
-				//criba
-				for (i=2; i<Math.sqrt(dim)+1; i++) {
-					if (esPrimo[i]) {
-						//Eliminar los multiplos de i
-						for(j=2*i; j<dim; j+=i)
-							esPrimo[j] = false;
-					}
-				}
-				//Cuantos primos ahi?
-				int cuenta = 0;
-				for (i=0; i<dim; i++) {
-					if (esPrimo[i])
-						cuenta++;
-				}
+				//criba // PONER EN OTRO METODO// 
+			
+				criba(dim, esPrimo);
+				int cuenta = cuentaPrimos(dim, esPrimo);
 				
-				//Rellenar el vector de numeros primos
+				//Rellenar el vector de numeros primos  //PONER EN OTRO METODO//
 				int [] primos = new int[cuenta];
 				for (i=0, j=0; i<dim; i++) {
 					if(esPrimo[i])
@@ -42,6 +32,31 @@ public class Criba {
 				// Vector vacio
 			}
 			
+		}
+		public static int cuentaPrimos(int dim, boolean[] esPrimo) {
+			int i = 0, cuenta = 0;
+			for (i=0; i<dim; i++) {
+				if (esPrimo[i])
+					cuenta++;
+			}
+			return cuenta;
+		}
+		public static void criba(int dim, boolean[] esPrimo) {
+			int i = 0, j = 0;
+			for (i=2; i<Math.sqrt(dim)+1; i++) {
+				if (esPrimo[i]) {
+			
+					for(j=2*i; j<dim; j+=i)
+						esPrimo[j] = false;
+				}
+			}
+		}
+		public static boolean[] iniciarPrimos(int dim) {
+			int i;
+			boolean[] esPrimo = new boolean[dim];
+			for (i=0; i<dim; i++ )
+				esPrimo[i] = true;
+			return esPrimo;
 		}
 		public static void main(String[] args) {
 			Scanner teclado = new Scanner(System.in);
@@ -58,6 +73,7 @@ public class Criba {
 			for (int i = 0; i < vector.length; i++) {
 				if (i%10==0)System.out.println();
 				System.out.println(vector[i]+"\t");
+				
 			}	
 		}
 	}
