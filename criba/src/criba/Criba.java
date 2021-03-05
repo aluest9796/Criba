@@ -3,7 +3,10 @@ package criba;
 import java.util.Scanner;
 
 public class Criba {
-		
+		/*
+		 * @param Criba
+		 * @author aluest9796
+		 */
 		public static int[] generarPrimos(int max) {
 			if (max >=2) {
 				int dim= max + 1; 
